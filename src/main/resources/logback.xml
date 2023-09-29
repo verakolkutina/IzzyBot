@@ -1,0 +1,38 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+</beans>-->
+<configuration>
+<property name="HOME_LOG" value="/var/log/proj3ct.io/tg-izzy-bot/app.log"/>
+<appender name="FILE-ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${HOME_LOG}</file>
+
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+
+
+        <fileNamePattern>/var/log/proj3ct.io/tg-izzy-bot/app.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+
+        <maxFileSize>10MB</maxFileSize>
+        <totalSizeCap>1GB</totalSizeCap>
+        <maxHistory>60</maxHistory>
+
+    </rollingPolicy>
+
+
+    <encoder>
+        <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+</appender>
+<logger name="io.proj3ct.SpringIzzyBot" level="debug" additivity="false">
+    <appender-ref ref="FILE_ROLLING"/>
+</logger>
+<root level="info">
+    <appender-ref ref="FILE-ROLLING"/>
+</root>
+
+<root level="error">
+    <appender-ref ref="FILE-ROLLING"/>
+</root>
+</configuration>
